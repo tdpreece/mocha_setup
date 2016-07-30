@@ -59,5 +59,5 @@ Then ran the test,
 ## Running browser tests with PhantomJS
 
 ```
-sudo npm install -g phantomjs
+sudo npm install -g phantomjs-prebuilt
 ```
