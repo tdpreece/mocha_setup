@@ -56,7 +56,14 @@ I ran the tests in the terminal,
 ## Running tests in a browser
 
 I wanted to be able to test interactions that involved the DOM so I had to run tests in the browser.
-To do this I created an html file that contained some setup for Mocha and a fixture for my tests (this was based
+
+I first installed jQuery for convenience.
+
+```
+npm install --save-dev jquery
+```
+
+Then I created an html file that contained some setup for Mocha and a fixture for my tests (this was based
 on the [example in Mocha's documentation](https://mochajs.org/#browser-specific-methods)).
 
 ```html
@@ -71,22 +78,20 @@ on the [example in Mocha's documentation](https://mochajs.org/#browser-specific-
   <div id="mocha"></div>
   <div id="fixture"></div>
 
-  <script src="https://code.jquery.com/jquery-3.1.0.min.js" ></script>
+  <script src="./node_modules/jquery/dist/jquery.js" ></script>
   <script src="./node_modules/mocha/mocha.js"></script>
   <script src="./node_modules/chai/chai.js"></script>
 
   <script>mocha.setup('bdd')</script>
   <script src="in_browser_test.js"></script>
   <script>
-    mocha.checkLeaks();
-    mocha.globals(['jQuery']);
     mocha.run();
   </script>
 </body>
 </html>
 ```
 
-I then created a test file.
+I created a nwe Javascript test file that interacted with the DOM.
 
 ```javascript
 /* 
@@ -119,10 +124,36 @@ function addsName(el, aname) {
 
 I ran the tests by opening the html file in a browser.
 
-![alt text](http://tdpreece.github.io/assets/img/mocha_setup/mocha_tests_in_browser.png "Simple test run results")
+![alt text](http://tdpreece.github.io/assets/img/mocha_setup/mocha_tests_in_browser.png "In browser run results")
 
 ## Running tests with PhantomJS
 
+I wanted to be able to run these tests quickly from the command line without the need
+to start up a full web browser so I installed [PhantomJS](http://phantomjs.org/) (a headless browser).
+
+I ran the following command to install a PhantomJS runner for Mocha along with PhantomJS and other dependencies.
+
+```bash
+npm install --save-dev mocha-phantomjs
 ```
-sudo npm install -g phantomjs-prebuilt
+
+I then made a copy of the in_browser_test.html above called phantom_test_runner.html and made the
+following changes,
+
+```html
+   <script>mocha.setup('bdd')</script>
+   <script src="in_browser_test.js"></script>
+   <script>
+-    mocha.run();
++    if (window.mochaPhantomJS) { mochaPhantom.run(); }
++    else { mocha.run(); }
+   </script>
 ```
+
+I could then run the tests using PhantomJS,
+
+```bash
+./node_modules/mocha-phantomjs/bin/mocha-phantomjs phantom_test_runner.html
+```
+
+![alt text](http://tdpreece.github.io/assets/img/mocha_setup/mocha_phantomjs_run.png "Phantom run results")
