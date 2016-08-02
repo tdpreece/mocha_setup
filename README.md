@@ -4,8 +4,8 @@ The following describes how I went about setting up [Mocha](https://mochajs.org/
 for testing some simple Javascript.  I tried to do this with as few dependencies
 as possible so I could focus on Mocha's role.  In production I'd also be 
 using the [Webpack](karma test runner) (to ease working with multiple 
-Javascript modules), [Karma](https://karma-runner.github.io) test runner
-and [Gulp](http://gulpjs.com/) to automate Tasks.
+Javascript modules), [Karma](https://karma-runner.github.io) (test runner)
+and [Gulp](http://gulpjs.com/) (to automate Tasks).
 
 ## Installing Mocha
 I created a new directory for this project then crated a new node project by
@@ -16,7 +16,7 @@ npm init
 ```
 
 I then installed Mocha and [Chai](http://chaijs.com/) an assertion library.  Mocha
-doesn't come with assertion library.
+doesn't come with an assertion library.
 
 ```bash
 npm install --save-dev mocha
@@ -25,7 +25,7 @@ npm install --save-dev chai
 
 ## A simple test
 
-I created a simple test file using the example in Mocha's documentation as a guide.
+I created a simple test file using the example in [Mocha's documentation](https://mochajs.org/#getting-started) as a guide.
 
 ```javascript
 /* 
@@ -91,7 +91,7 @@ on the [example in Mocha's documentation](https://mochajs.org/#browser-specific-
 </html>
 ```
 
-I created a nwe Javascript test file that interacted with the DOM.
+I created a new Javascript test file that interacted with the DOM.
 
 ```javascript
 /* 
@@ -137,7 +137,7 @@ I ran the following command to install a PhantomJS runner for Mocha along with P
 npm install --save-dev mocha-phantomjs
 ```
 
-I then made a copy of the in_browser_test.html above called phantom_test_runner.html and made the
+I then made a copy of the in_browser_test.html named phantom_test_runner.html and made the
 following changes,
 
 ```html
@@ -150,7 +150,7 @@ following changes,
    </script>
 ```
 
-I could then run the tests using PhantomJS,
+I could then run the tests using PhantomJS from the command line,
 
 ```bash
 ./node_modules/mocha-phantomjs/bin/mocha-phantomjs phantom_test_runner.html
