@@ -2,21 +2,21 @@
 
 The following describes how I went about setting up [Mocha](https://mochajs.org/)
 for testing some simple Javascript.  I tried to do this with as few dependencies
-as possible so I could focus on Mocha's role.  In production I'd also be 
-using the [Webpack](karma test runner) (to ease working with multiple 
+as possible so I could focus on Mocha's role.  In production I'd also be
+using the [Webpack](karma test runner) (to ease working with multiple
 Javascript modules), [Karma](https://karma-runner.github.io) (test runner)
 and [Gulp](http://gulpjs.com/) (to automate Tasks).
 
 ## Installing Mocha
-I created a new directory for this project then crated a new node project by
-running a the following command and hitting Enter when presented with questions.
+I created a new directory for this project then created a new node project by
+running the following command and hitting Enter when presented with questions.
 
 ```bash
 npm init
 ```
 
-I then installed Mocha and [Chai](http://chaijs.com/) an assertion library.  Mocha
-doesn't come with an assertion library.
+I then installed Mocha and [Chai](http://chaijs.com/) an assertion library.
+Mocha doesn't come with an assertion library.
 
 ```bash
 npm install --save-dev mocha
@@ -25,7 +25,8 @@ npm install --save-dev chai
 
 ## A simple test
 
-I created a simple test file using the example in [Mocha's documentation](https://mochajs.org/#getting-started) as a guide.
+I created a simple test file using the example in
+[Mocha's documentation](https://mochajs.org/#getting-started) as a guide.
 
 ```javascript
 /* 
@@ -55,7 +56,8 @@ I ran the tests in the terminal,
 
 ## Running tests in a browser
 
-I wanted to be able to test interactions that involved the DOM so I had to run tests in the browser.
+I wanted to be able to test interactions that involved the DOM so I had to run
+tests in the browser.
 
 I first installed jQuery for convenience.
 
@@ -63,8 +65,9 @@ I first installed jQuery for convenience.
 npm install --save-dev jquery
 ```
 
-Then I created an html file that contained some setup for Mocha and a fixture for my tests (this was based
-on the [example in Mocha's documentation](https://mochajs.org/#browser-specific-methods)).
+Then I created an html file that contained some setup for Mocha and a fixture
+for my tests (this was based on the
+[example in Mocha's documentation](https://mochajs.org/#browser-specific-methods)).
 
 ```html
 <!DOCTYPE html>
@@ -94,7 +97,7 @@ on the [example in Mocha's documentation](https://mochajs.org/#browser-specific-
 I created a new Javascript test file that interacted with the DOM.
 
 ```javascript
-/* 
+/*
  * in_browser_test.js
  */
 
@@ -102,7 +105,7 @@ describe('Adds my name', function () {
     before(function () {
        this.$fixture = $('<div id="fixture"></div>');
     });
-    
+
     beforeEach(function () {
         $( '#fixtures' ).empty();
     });
@@ -128,17 +131,19 @@ I ran the tests by opening the html file in a browser.
 
 ## Running tests with PhantomJS
 
-I wanted to be able to run these tests quickly from the command line without the need
-to start up a full web browser so I installed [PhantomJS](http://phantomjs.org/) (a headless browser).
+I wanted to be able to run these tests quickly from the command line without
+the need to start up a full web browser so I installed
+[PhantomJS](http://phantomjs.org/) (a headless browser).
 
-I ran the following command to install a PhantomJS runner for Mocha along with PhantomJS and other dependencies.
+I ran the following command to install a PhantomJS runner for Mocha along with
+PhantomJS and other dependencies.
 
 ```bash
 npm install --save-dev mocha-phantomjs
 ```
 
-I then made a copy of the in_browser_test.html named phantom_test_runner.html and made the
-following changes,
+I then made a copy of the in_browser_test.html named phantom_test_runner.html
+and made the following changes,
 
 ```html
    <script>mocha.setup('bdd')</script>
